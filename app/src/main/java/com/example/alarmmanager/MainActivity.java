@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +24,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton buttonOnceTime;
     AlarmReceiver alarmReceiver;
     Button buttonSetOnce;
+
+    TextView textRepeatingTime;
+    EditText inputRepeatingMessage;
+    ImageButton buttonRepeatTime;
+    Button buttonSetRepeating;
 
     final String DATE_PICKER_TAG= "DatePicker";
     final String TIME_PICKER_ONCE_TAG= "TimePickerOnce";
@@ -42,6 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonOnceDate.setOnClickListener(this);
         buttonOnceTime.setOnClickListener(this);
         buttonSetOnce.setOnClickListener(this);
+
+        textRepeatingTime= findViewById(R.id.text_repeating_time);
+        buttonSetRepeating= findViewById(R.id.button_set_repeating_alarm);
+        inputRepeatingMessage= findViewById(R.id.input_repeating_message);
+        buttonRepeatTime= findViewById(R.id.button_repeating_time);
+        buttonRepeatTime.setOnClickListener(this);
+        buttonSetRepeating.setOnClickListener(this);
+
     }
 
     @Override
@@ -65,6 +79,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         onceTime,
                         onceMessage);
                 break;
+            case R.id.button_repeating_time:
+                TimePickerFragment timePickerFragment1= new TimePickerFragment();
+                timePickerFragment1.show(getSupportFragmentManager(), TIME_PICKER_REPEAT_TAG);
+                break;
+            case R.id.button_set_repeating_alarm:
+                String repeatTime= textRepeatingTime.getText().toString();
+                String repeatMessage= inputRepeatingMessage.getText().toString();
+                alarmReceiver.setRepeatingAlarm(this, AlarmReceiver.TYPE_ONE_REPEATING,
+                        repeatTime,
+                        repeatMessage);
+                break;
         }
     }
 
@@ -86,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case TIME_PICKER_ONCE_TAG:
                 textOnceTime.setText(dateFormat.format(calendar.getTime()));
                 break;
+            case  TIME_PICKER_REPEAT_TAG:
+                // set text from activity time picker
+                textRepeatingTime.setText(dateFormat.format(calendar.getTime()));
                 default:
                     break;
         }

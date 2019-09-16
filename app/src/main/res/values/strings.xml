@@ -5,4 +5,8 @@
     <string name="set_oone_time_alarm">set oone time alarm</string>
     <string name="tanggal_alarm">Tanggal Alarm</string>
     <string name="waktu_alarm">Waktu Alarm</string>
+    <string name="repeating_alarm">Repeating Alarm</string>
+    <string name="alarm_time">Alarm Time</string>
+    <string name="alam_message">Alam Message</string>
+    <string name="set_repeating_alarm">Set Repeating Alarm</string>
 </resources>
