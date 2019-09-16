@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton buttonRepeatTime;
     Button buttonSetRepeating;
 
+    Button buttonCancelRepeatAlarmMain;
+
     final String DATE_PICKER_TAG= "DatePicker";
     final String TIME_PICKER_ONCE_TAG= "TimePickerOnce";
     final String TIME_PICKER_REPEAT_TAG= "TimePickerRepeat";
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRepeatTime= findViewById(R.id.button_repeating_time);
         buttonRepeatTime.setOnClickListener(this);
         buttonSetRepeating.setOnClickListener(this);
+
+        buttonCancelRepeatAlarmMain= findViewById(R.id.button_cancel_repeating_alarm_main);
+        buttonCancelRepeatAlarmMain.setOnClickListener(this);
 
     }
 
@@ -90,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         repeatTime,
                         repeatMessage);
                 break;
+            case R.id.button_cancel_repeating_alarm_main:
+                alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_ONE_REPEATING);
+                break;
         }
     }
 
@@ -113,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case  TIME_PICKER_REPEAT_TAG:
                 // set text from activity time picker
+                Toast.makeText(this, "ane", Toast.LENGTH_SHORT).show();
                 textRepeatingTime.setText(dateFormat.format(calendar.getTime()));
                 default:
                     break;
